@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using AliAssistApp.Exceptions;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AliAssistApp.Middleware;
@@ -7,21 +8,25 @@ namespace AliAssistApp.Middleware;
 public class AuthMiddleware
 {
     private readonly RequestDelegate _next;
+    private readonly IConfiguration _configuration;
 
-    public AuthMiddleware(RequestDelegate next)
+    public AuthMiddleware(RequestDelegate next, IConfiguration configuration)
     {
         _next = next;
+        _configuration = configuration;
     }
 
-    public async Task InvokeAsync(HttpContext context, IConfiguration configuration)
+    public async Task InvokeAsync(HttpContext context)
     {
         var token = context.Request.Headers["X-Access-Token"].FirstOrDefault();
+        
+        if (string.IsNullOrWhiteSpace(token))
         
         if (!string.IsNullOrWhiteSpace(token))
         {
             try
             {
-                var jwtSettings = configuration.GetSection(nameof(JWTSettings)).Get<JWTSettings>();
+                var jwtSettings = _configuration.GetSection(nameof(JWTSettings)).Get<JWTSettings>();
                 var key = Encoding.UTF8.GetBytes(jwtSettings.Key);
         
                 var tokenHandler = new JwtSecurityTokenHandler();
@@ -37,15 +42,11 @@ public class AuthMiddleware
             }
             catch (SecurityTokenExpiredException)
             {
-                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                await context.Response.WriteAsync("Token expired.");
-                return;
+                throw new TokenExpiredException();
             }
             catch (Exception)
             {
-                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                await context.Response.WriteAsync("Invalid token.");
-                return;
+                throw new InvalidTokenException();
             }
             
             await _next(context);
