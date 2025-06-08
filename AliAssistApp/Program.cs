@@ -1,10 +1,8 @@
-using System.ComponentModel.DataAnnotations;
 using AliAssistApp.Exceptions;
 using AliAssistApp.Middleware;
 using AliAssistApp.Services;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 var builder = WebApplication.CreateBuilder(args);
 
