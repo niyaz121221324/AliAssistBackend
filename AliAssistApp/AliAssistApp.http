@@ -1,0 +1,6 @@
+@AliAssistApp_HostAddress = http://localhost:5095
+
+GET {{AliAssistApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  aliassistapp:
+    build:
+      context: "/Users/a1/Documents/AliAssistApp"
+      dockerfile: "AliAssistApp/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/AliAssistApp.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "aliassistapp:dev"
+    ports: []
+    volumes:
+    - "/Users/a1/Documents/AliAssistApp/AliAssistApp:/app:rw"
+    - "/Users/a1/Documents/AliAssistApp:/src:rw"
+    - "/Users/a1/.nuget/packages:/home/app/.nuget/packages"
+    working_dir: "/app"

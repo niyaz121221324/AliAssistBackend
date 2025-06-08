@@ -1,0 +1,6 @@
+﻿services:
+  aliassistapp:
+    image: aliassistapp
+    build:
+      context: .
+      dockerfile: AliAssistApp/Dockerfile
