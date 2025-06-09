@@ -18,10 +18,19 @@ public class AuthMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        var token = context.Request.Headers["X-Access-Token"].FirstOrDefault();
+        if (context.Request.Path.StartsWithSegments("/auth"))
+        {
+            await _next(context);
+            return;
+        }
         
+        var token = context.Request.Headers["X-Access-Token"].FirstOrDefault();
+
         if (string.IsNullOrWhiteSpace(token))
-            
+        {
+            throw new InvalidTokenException(); // Или 401 Unauthorized через context.Response
+        }
+        
         if (!string.IsNullOrWhiteSpace(token))
         {
             try
