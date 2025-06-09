@@ -1,6 +1,27 @@
 ﻿services:
+  postgres-db:
+    image: postgres:15
+    container_name: aliassist-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: aliassist_user
+      POSTGRES_PASSWORD: strongpassword
+      POSTGRES_DB: aliassist_db
+    ports:
+      - "5432:5432"
+    networks:
+      - aliassist-network\=
+      
   aliassistapp:
     image: aliassistapp
     build:
       context: .
       dockerfile: AliAssistApp/Dockerfile
+    depends_on:
+      - postgres-db
+    networks:
+      - "aliassist-network"
+      
+networks:
+  aliassist-network:
+    driver: bridge
