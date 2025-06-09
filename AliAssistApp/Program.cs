@@ -1,6 +1,7 @@
 using AliAssistApp.Auth.Middleware;
 using AliAssistApp.Exceptions;
 using AliAssistApp.Services;
+using AliAssistApp.Services.Auth;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,10 @@ builder.Services.AddHttpClient();
 // Регистрация парсеров
 builder.Services.AddScoped<IAmazonProductService, AmazonAmazonProductService>(); 
 builder.Services.AddScoped<IAliExpressProductService, AliExpressProductService>();
+
+// Регистрация сервисов авторизации
+builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection(nameof(JWTSettings)));
+builder.Services.AddSingleton<IJWTProvider, JWTProvider>();
 
 // Регистрация CORS
 builder.Services.AddCors(options =>
