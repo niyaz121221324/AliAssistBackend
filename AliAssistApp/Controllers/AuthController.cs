@@ -12,6 +12,7 @@ public class AuthController : BaseApiController
         _jwtProvider = jwtProvider;
     }
 
+    [HttpPost("login")]
     public async Task<ActionResult<JWTProvider>> Get(UserDTO user)
     {
         if (user is null || string.IsNullOrWhiteSpace(user.Email) || string.IsNullOrWhiteSpace(user.Email))
