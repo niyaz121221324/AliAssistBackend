@@ -48,7 +48,7 @@ app.UseCors("AllowSpecificOrigin"); // Включаем политику CORS д
 // Подключение кастомного middleware для JWT-аутентификации
 app.UseMiddleware<AuthMiddleware>();
 
-app.UseAuthorization();
+// app.UseAuthorization();
 app.MapControllers();
 
 app.UseExceptionHandler(errorApp =>

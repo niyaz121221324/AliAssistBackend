@@ -10,18 +10,25 @@
     ports:
       - "5432:5432"
     networks:
-      - aliassist-network\=
-      
+      - aliassist-network
+
   aliassistapp:
-    image: aliassistapp
+    container_name: aliassist-app
     build:
       context: .
       dockerfile: AliAssistApp/Dockerfile
+    image: aliassistapp
+    restart: always
     depends_on:
       - postgres-db
+    ports:
+      - "5000:80"  
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=postgres-db;Database=aliassist_db;Username=aliassist_user;Password=strongpassword"
     networks:
-      - "aliassist-network"
-      
+      - aliassist-network
+
 networks:
   aliassist-network:
     driver: bridge
