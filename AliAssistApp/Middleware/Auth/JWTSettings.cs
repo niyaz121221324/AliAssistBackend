@@ -1,4 +1,4 @@
-namespace AliAssistApp.Middleware;
+namespace AliAssistApp.Auth.Middleware;
 
 public class JWTSettings
 {

@@ -40,7 +40,9 @@ public class AliExpressProductService : IAliExpressProductService
         var root = JsonSerializer.Deserialize<AliResponseRoot>(json, options);
 
         if (root?.Products?.Product == null)
+        {
             return new List<Product>();
+        }
 
         return root.Products.Product.Select(item => new Product
         {

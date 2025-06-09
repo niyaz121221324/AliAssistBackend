@@ -3,7 +3,7 @@ using System.Text;
 using AliAssistApp.Exceptions;
 using Microsoft.IdentityModel.Tokens;
 
-namespace AliAssistApp.Middleware;
+namespace AliAssistApp.Auth.Middleware;
 
 public class AuthMiddleware
 {
@@ -21,7 +21,7 @@ public class AuthMiddleware
         var token = context.Request.Headers["X-Access-Token"].FirstOrDefault();
         
         if (string.IsNullOrWhiteSpace(token))
-        
+            
         if (!string.IsNullOrWhiteSpace(token))
         {
             try

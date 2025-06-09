@@ -1,5 +1,5 @@
+using AliAssistApp.Auth.Middleware;
 using AliAssistApp.Exceptions;
-using AliAssistApp.Middleware;
 using AliAssistApp.Services;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
