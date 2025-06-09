@@ -12,7 +12,7 @@ AliAssistApp — это внутренний сервис, разработан�
 
 ## 🛠️ Технологии
 
-- **.NET 7 / ASP.NET Core**
+- **.NET 8 / ASP.NET Core**
 - **PostgreSQL**
 - **Docker / Docker Compose**
 - **JWT (JSON Web Tokens)**
