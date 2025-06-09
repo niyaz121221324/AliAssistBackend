@@ -28,7 +28,7 @@ public class AuthMiddleware
 
         if (string.IsNullOrWhiteSpace(token))
         {
-            throw new InvalidTokenException(); // Или 401 Unauthorized через context.Response
+            throw new InvalidTokenException(); 
         }
         
         if (!string.IsNullOrWhiteSpace(token))
